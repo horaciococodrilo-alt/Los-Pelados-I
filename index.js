@@ -5,19 +5,32 @@ import {
   seleccionarSabores,
 } from "./dataEntry.js";
 
-// Cargar sabores y productos
-// COMPLETEN USTEDES
-let sabores;
-let productos;
+import fs from "fs";
 
-// Ingresar cliente
+let sabores = JSON.parse(fs.readFileSync("./data/sabores.json", "utf8"));
+let productos = JSON.parse(fs.readFileSync("./data/productos.json", "utf8"));
 let cliente = ingresarCliente();
-// Elegir producto
 let producto = seleccionarProducto(productos);
-// Elegir cantidad de gustos
 let gustos = seleccionarCantidadGustos(producto.maxGustos);
-// Elegir sabores
 let saboresElegidos = seleccionarSabores(sabores, gustos);
 
-// Guardar pedido
-// COMPLETEN USTEDES
+let nuevoPedido = {
+  cliente: cliente,
+  producto: producto.nombre,
+  sabores: saboresElegidos,
+};
+
+let pedidos = [];
+try {
+  const pedidosJSON = fs.readFileSync("./data/pedidos.json", "utf8");
+  pedidos = JSON.parse(pedidosJSON);
+  if (!Array.isArray(pedidos)) {
+    pedidos = [];
+  }
+} catch (error) {
+  pedidos = [];
+}
+
+pedidos.push(nuevoPedido);
+
+fs.writeFileSync("./data/pedidos.json", JSON.stringify(pedidos, null, 2), "utf8");

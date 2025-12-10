@@ -1,1 +1,19 @@
-[]
+[
+  {
+    "cliente": "simon",
+    "producto": "cucurucho",
+    "sabores": [
+      "Chocolate",
+      "Dulce de Leche"
+    ]
+  },
+  {
+    "cliente": "sl",
+    "producto": "1 kilo",
+    "sabores": [
+      "Tiramisú",
+      "Crema del Cielo",
+      "Mousse de Manzana"
+    ]
+  }
+]
